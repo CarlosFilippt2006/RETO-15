@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio personal de Carlos Gomez, estudiante de Desarrollo de Software en CESDE, Medellín.">
+  <title>Carlos Gomez | Desarrollo de Software</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #141d31;
+      --surface-2: #1b2942;
+      --text: #f2f5fb;
+      --muted: #aebbd0;
+      --accent: #65dfc0;
+      --line: rgba(255,255,255,.11);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif; line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(11,16,32,.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { font-size: 1.25rem; font-weight: 800; letter-spacing: .3px; }
+    .brand span, h1 span { color: var(--accent); }
+    nav { display: flex; flex-wrap: wrap; gap: 22px; }
+    nav a { color: var(--muted); font-size: .93rem; }
+    nav a:hover { color: var(--accent); }
+    .hero {
+      min-height: 650px; display: flex; align-items: center; position: relative;
+      background:
+        linear-gradient(90deg, rgba(7,12,24,.96) 0%, rgba(7,12,24,.82) 48%, rgba(7,12,24,.2) 100%),
+        url("assets/img/carlos-portada.jpeg") center 38% / cover no-repeat;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: auto 0 0; height: 150px;
+      background: linear-gradient(transparent, var(--bg));
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 690px; padding: 100px 0 125px; }
+    .tag {
+      display: inline-block; padding: 7px 14px; border-radius: 30px;
+      color: var(--accent); background: rgba(101,223,192,.09);
+      border: 1px solid rgba(101,223,192,.4); font-size: .86rem;
+    }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.2rem); line-height: 1.05; letter-spacing: -2px; margin: 22px 0 15px; }
+    .hero p { color: #d4deed; font-size: 1.15rem; max-width: 620px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+    .btn {
+      display: inline-block; padding: 12px 20px; border-radius: 9px;
+      border: 1px solid var(--accent); font-weight: 700; transition: .2s;
+    }
+    .btn-primary { background: var(--accent); color: #071711; }
+    .btn-outline { color: var(--text); }
+    .btn:hover { transform: translateY(-2px); }
+    section { padding: 85px 0; }
+    .section-alt { background: #0f182a; border-block: 1px solid var(--line); }
+    .eyebrow {
+      color: var(--accent); font-size: .8rem; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    h2 { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.2; margin: 8px 0 16px; }
+    h3 { font-size: 1.15rem; margin: 6px 0 10px; }
+    .muted { color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: 310px 1fr; align-items: center; gap: 48px; }
+    .profile-photo {
+      display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+      object-position: center 25%; border-radius: 18px;
+      border: 1px solid var(--line); box-shadow: 0 22px 60px rgba(0,0,0,.3);
+    }
+    .facts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 25px; }
+    .fact { padding: 13px 15px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+    .fact strong { display: block; color: var(--accent); font-size: .78rem; text-transform: uppercase; letter-spacing: .7px; }
+    .fact span { display: block; margin-top: 3px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+    .card {
+      padding: 24px; background: var(--surface); border: 1px solid var(--line);
+      border-radius: 15px; transition: .2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(101,223,192,.5); }
+    .symbol { font-size: 1.65rem; margin-bottom: 12px; }
+    .card p { color: var(--muted); margin: 0; font-size: .96rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .pills span {
+      padding: 6px 11px; border: 1px solid var(--line); border-radius: 7px;
+      background: var(--surface-2); color: #dce6f5; font-size: .87rem;
+    }
+    .project-type { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .project { min-height: 225px; display: flex; flex-direction: column; }
+    .project p { flex: 1; }
+    .project small { color: var(--muted); margin-top: 14px; }
+    .closing { max-width: 760px; margin: auto; text-align: center; }
+    footer { padding: 25px 0; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 760px) {
+      .nav-wrap { align-items: flex-start; flex-direction: column; padding: 14px 0; gap: 10px; }
+      nav { gap: 14px; }
+      .hero { min-height: 590px; background-position: 58% center; }
+      .hero-content { padding: 75px 0 115px; }
+      .about-grid { grid-template-columns: 1fr; gap: 26px; }
+      .profile-photo { max-width: 330px; aspect-ratio: 1 / 1; }
+      .grid { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+      section { padding: 65px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio">Carlos Gomez<span>.</span></a>
+      <nav aria-label="Navegación principal">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#formacion">Formación</a>
+        <a href="#intereses">Intereses</a>
+        <a href="#proyectos">Proyectos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <span class="tag">Estudiante de Desarrollo de Software · CESDE</span>
+          <h1>Hola, soy <span>Carlos</span>.</h1>
+          <p>Tengo 20 años, vivo en Medellín y estudio Desarrollo de Software en CESDE. Me interesa la tecnología, aprender cómo funcionan las herramientas digitales y desarrollar soluciones a través de la programación.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#proyectos">Conoce mis proyectos</a>
+            <a class="btn btn-outline" href="#sobre-mi">Sobre mí</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre-mi">
+      <div class="container about-grid">
+        <img class="profile-photo" src="assets/img/carlos-perfil.jpeg" alt="Fotografía de Carlos Gomez">
+        <div>
+          <span class="eyebrow">Un poco sobre mí</span>
+          <h2>Curiosidad, aprendizaje y tecnología.</h2>
+          <p class="muted">Mi nombre es Carlos Gomez, tengo 20 años y vivo en Medellín, Colombia. Actualmente soy estudiante de Desarrollo de Software en CESDE, donde estoy construyendo mis conocimientos y habilidades para abrirme camino en el mundo de la tecnología.</p>
+          <p class="muted">Me motiva aprender cosas nuevas, desarrollar el pensamiento lógico y encontrar formas de convertir ideas en soluciones. Considero que cada ejercicio y proyecto es una oportunidad para mejorar y ganar experiencia.</p>
+          <div class="facts">
+            <div class="fact"><strong>Nombre</strong><span>Carlos Gomez</span></div>
+            <div class="fact"><strong>Edad</strong><span>20 años</span></div>
+            <div class="fact"><strong>Ciudad</strong><span>Medellín, Colombia</span></div>
+            <div class="fact"><strong>Institución</strong><span>CESDE</span></div>
+            <div class="fact"><strong>Área de estudio</strong><span>Desarrollo de Software</span></div>
+            <div class="fact"><strong>Interés profesional</strong><span>Programación y tecnología</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="formacion">
+      <div class="container">
+        <span class="eyebrow">Mi camino académico</span>
+        <h2>Formación</h2>
+        <p class="muted">Mi formación en CESDE es el punto de partida para desarrollar conocimientos técnicos y prepararme para nuevos retos en el sector tecnológico.</p>
+        <div class="grid">
+          <article class="card">
+            <div class="symbol">🎓</div>
+            <h3>CESDE</h3>
+            <p>Estudiante de Desarrollo de Software, enfocado en aprender los fundamentos necesarios para diseñar y construir programas.</p>
+          </article>
+          <article class="card">
+            <div class="symbol">🧠</div>
+            <h3>Lógica y programación</h3>
+            <p>Interés en fortalecer el razonamiento lógico, la solución de problemas y el pensamiento estructurado mediante código.</p>
+          </article>
+          <article class="card">
+            <div class="symbol">💻</div>
+            <h3>Aprendizaje continuo</h3>
+            <p>Disposición para explorar herramientas, practicar nuevos conceptos y mantenerme actualizado en el área del desarrollo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="intereses">
+      <div class="container">
+        <span class="eyebrow">Áreas de interés</span>
+        <h2>Lo que quiero seguir desarrollando</h2>
+        <p class="muted">Como estudiante, estoy en una etapa de aprendizaje y exploración de distintas áreas del desarrollo de software.</p>
+        <div class="grid">
+          <article class="card">
+            <div class="symbol">🌐</div>
+            <h3>Desarrollo web</h3>
+            <p>Crear sitios web claros, funcionales y adaptables, cuidando tanto su estructura como la experiencia de las personas que los utilizan.</p>
+            <div class="pills"><span>HTML</span><span>CSS</span><span>Interfaces web</span></div>
+          </article>
+          <article class="card">
+            <div class="symbol">⌨️</div>
+            <h3>Programación</h3>
+            <p>Aprender lenguajes de programación y aplicar sus fundamentos para construir programas que resuelvan necesidades concretas.</p>
+            <div class="pills"><span>Algoritmos</span><span>Lógica</span><span>Java</span></div>
+          </article>
+          <article class="card">
+            <div class="symbol">🗄️</div>
+            <h3>Bases de datos</h3>
+            <p>Comprender cómo se almacena, organiza y consulta la información dentro de los sistemas informáticos.</p>
+            <div class="pills"><span>SQL</span><span>Datos</span><span>Modelado</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="proyectos">
+      <div class="container">
+        <span class="eyebrow">Mi proceso</span>
+        <h2>Proyectos y práctica</h2>
+        <p class="muted">Este espacio está pensado para mostrar los trabajos que vaya desarrollando durante mi formación.</p>
+        <div class="grid">
+          <article class="card project">
+            <span class="project-type">Proyecto académico</span>
+            <h3>Ejercicios de programación</h3>
+            <p>Prácticas para desarrollar la lógica, comprender estructuras de control y aprender a organizar soluciones paso a paso.</p>
+            <small>Enfoque: fundamentos de desarrollo de software.</small>
+          </article>
+          <article class="card project">
+            <span class="project-type">Desarrollo web</span>
+            <h3>Diseño de páginas web</h3>
+            <p>Construcción de páginas como ejercicio para aprender a estructurar contenido y presentar información de forma organizada.</p>
+            <small>Enfoque: HTML, CSS y diseño adaptable.</small>
+          </article>
+          <article class="card project">
+            <span class="project-type">En construcción</span>
+            <h3>Próximos proyectos</h3>
+            <p>Este portafolio crecerá con nuevas prácticas, aplicaciones y proyectos que reflejen mis avances como estudiante.</p>
+            <small>Enfoque: aprendizaje y mejora continua.</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container closing">
+        <span class="eyebrow">Gracias por visitar</span>
+        <h2>Este es el comienzo de mi camino en tecnología.</h2>
+        <p class="muted">Mi objetivo es seguir aprendiendo, fortalecer mis habilidades y transformar los conocimientos adquiridos en proyectos que aporten valor.</p>
+        <a class="btn btn-primary" href="#inicio">Volver al inicio ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Carlos Gomez · Portafolio personal · Medellín, Colombia</div>
+  </footer>
+</body>
+</html>
